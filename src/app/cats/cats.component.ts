@@ -9,6 +9,9 @@ import { Cat } from '../models/cats';
 		<div *ngFor="let cat of cats">
 			<a [routerLink]="[cat.id]">{{ cat.name }}: {{ cat.type}}, {{ cat.age }}</a>
 		</div>
+		<div>
+			<a [routerLink]="['addCat']">Add Cat</a>
+		</div>
 	`
 })
 

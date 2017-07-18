@@ -1,0 +1,10 @@
+<div>
+	<form #catForm="ngForm" (ngSubmit)="onSubmit()" name="catForm" >
+		<div>
+			Name: <input type="text" name="name" [(ngModel)]="model.name">
+			Type: <input type="text" name="type" [(ngModel)]="model.type">
+			Age: <input type="text" name="age" [(ngModel)]="model.age">
+		</div>
+		<button type="sbumit">Add</button>
+	</form>	
+</div>

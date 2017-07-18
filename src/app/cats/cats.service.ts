@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
+import { Cat } from '../models/cats';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -34,5 +35,17 @@ export class CatsService {
 				   		console.log(`Error: ${error}`);
 				   		return Promise.reject(error.message || error);
 				   });
+	}
+
+	createCat(cat: Cat): Promise<any> {
+		return this.http.post(`/api/cats/`, cat)
+						.toPromise()
+						.then(response => {
+							return response.json();
+						})
+						.catch((error: any) => {
+					   		console.log(`Error: ${error}`);
+					   		return Promise.reject(error.message || error);
+					   	});
 	}
 }

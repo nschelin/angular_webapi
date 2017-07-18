@@ -7,8 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using ang_webapi.Database;
+using ang_webapi.Models;
 
 namespace ang_webapi
 {
@@ -30,7 +33,9 @@ namespace ang_webapi
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddDbContext<CatContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,10 +44,12 @@ namespace ang_webapi
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-
             app.UseMvc();
             app.UseMvcWithDefaultRoute();
             
+            var context = app.ApplicationServices.GetService<CatContext>();
+            AddExampleData(context);
+
             app.UseDefaultFiles();  // sets default file (index.html) as initial file
             // allows node_modules to be referenenced in index.html; 
             app.UseStaticFiles(new StaticFileOptions
@@ -54,6 +61,31 @@ namespace ang_webapi
             });
 
             app.UseStaticFiles();
+        }
+
+        public static void AddExampleData(CatContext context) {
+
+            if(context.Database.EnsureCreated()) {
+                if(!context.Cats.Any()) {
+                    var c1 = new Cat {
+                        Name = "Tom",
+                        Type = "Persian",
+                        Age = 5
+                    };
+
+                    var c2 = new Cat {
+
+                        Name = "Sylvester",
+                        Type = "Tabby",
+                        Age = 3
+                    };
+
+                    context.Cats.Add(c1);
+                    context.Cats.Add(c2);
+                    context.SaveChanges();
+                }
+                
+            }
         }
     }
 }

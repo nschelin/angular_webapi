@@ -3,45 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ang_webapi.Models;
+using ang_webapi.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace ang_webapi.Controllers
 {
     [Route("api/[controller]")]
     public class CatsController : Controller
     {
-        List<Cat> cats = new List<Cat>{
-            new Cat {
-                Id = 1,
-                Name = "Tom",
-                Type = "Persian",
-                Age = 5
-            },
-
-             new Cat {
-                Id = 2,
-                Name = "Sylvester",
-                Type = "Tabby",
-                Age = 3
-            }
-        };
+        CatContext _db;
+        public CatsController(CatContext db) {
+            _db = db;
+        }
+        
         // GET api/values
         [HttpGet]
         public IEnumerable<Cat> Get()
         {
-        	return cats;
+        	return _db.Cats.ToList();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name="GetCat")]
         public Cat Get(int id)
         {
-            return cats.SingleOrDefault(c => c.Id == id);
+            return _db.Cats.SingleOrDefault(c => c.Id == id);
         }
-    }
-    
-    public class Cat {
-        public int Id { get; set; }
-    	public string Name { get; set; }
-    	public string Type { get; set; }
-    	public int Age { get; set; }
+
+        [HttpPost]
+        public IActionResult Create([FromBody]Cat cat)
+        {
+            if(cat == null)
+                return BadRequest();
+
+            _db.Cats.Add(cat);
+            _db.SaveChanges();
+            
+            return CreatedAtRoute("GetCat", new { id = cat.Id }, cat);
+        }
+
     }
 }
