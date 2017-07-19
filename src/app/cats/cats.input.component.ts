@@ -12,10 +12,10 @@ export class CatsInputComponent implements OnInit {
 	model: Cat;
 	constructor(private catService: CatsService, private router: Router) { 
 		this.model = new Cat(); 
-		this.model.name = '';
-		this.model.id = 0;
-		this.model.type = '';
-		this.model.age = 0;
+		// this.model.name = '';
+		// this.model.id = 0;
+		// this.model.type = '';
+		// this.model.age = 0;
 	}
 
 	onSubmit(): void {

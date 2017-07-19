@@ -5,12 +5,22 @@ import { Cat } from '../models/cats';
 @Component({
 	selector: 'my-cats',
 	template: `
-		<h3>Cats!</h3>
-		<div *ngFor="let cat of cats">
-			<a [routerLink]="[cat.id]">{{ cat.name }}: {{ cat.type}}, {{ cat.age }}</a>
-		</div>
-		<div>
-			<a [routerLink]="['addCat']">Add Cat</a>
+		<div class="mdl-grid">
+			<div *ngFor="let cat of cats" class="mdl-cell mdl-cell--4-col">
+				<div class="demo-card-square mdl-card mdl-shadow--2dp">
+				  <div class="mdl-card__title mdl-card--expand">
+				    <h2 class="mdl-card__title-text">{{ cat.name }}</h2>
+				  </div>
+				  <div class="mdl-card__supporting-text">
+				    {{ cat.type }}, {{ cat.age }} 
+				  </div>
+				  <div class="mdl-card__actions mdl-card--border">
+				    <a [routerLink]="[cat.id]" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+				      View Details
+				    </a>
+				  </div>
+				</div>
+			</div>
 		</div>
 	`
 })

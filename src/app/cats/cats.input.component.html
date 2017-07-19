@@ -1,10 +1,36 @@
 <div>
 	<form #catForm="ngForm" (ngSubmit)="onSubmit()" name="catForm" >
-		<div>
-			Name: <input type="text" name="name" [(ngModel)]="model.name">
-			Type: <input type="text" name="type" [(ngModel)]="model.type">
-			Age: <input type="text" name="age" [(ngModel)]="model.age">
+		<div class="mdl-grid">
+			<div class="mdl-cell mdl-cell--4-col">
+				<div class="mdl-textfield mdl-js-textfield">
+				    <input class="mdl-textfield__input" type="text" name="name" id="name" [(ngModel)]="model.name">
+				    <label class="mdl-textfield__label" for="name">Name</label>
+			  	</div>		
+			</div>
 		</div>
-		<button type="sbumit">Add</button>
+		
+		<div class="mdl-grid">
+			<div class="mdl-cell mdl-cell--4-col">
+				<div class="mdl-textfield mdl-js-textfield">
+				    <input class="mdl-textfield__input" type="text" name="type" id="type" [(ngModel)]="model.type">
+				    <label class="mdl-textfield__label" for="type">Cat Type</label>
+			  	</div>	
+		  	</div>
+	  	</div>
+
+		<div class="mdl-grid">
+			<div class="mdl-cell mdl-cell--4-col">
+				<div class="mdl-textfield mdl-js-textfield">
+				    <input class="mdl-textfield__input" type="text" pattern="\d+" id="age" name="age" [(ngModel)]="model.age">
+				    <label class="mdl-textfield__label" for="age">Cat Age</label>
+				    <span class="mdl-textfield__error">Input is not a number!</span>
+			  	</div>
+		  	</div>
+	  	</div>
+	  	<div class="mdl-grid">
+	  		<div class="mdl-cell mdl-cell--4-col">
+				<button type="sbumit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Add Cat</button>
+			</div>
+		</div>
 	</form>	
 </div>
