@@ -1,13 +1,13 @@
 {
-    "compilerOptions": {
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true, //add this to your config.
-        "module": "commonjs", 
-        "target": "es6",
-        "moduleResolution": "node",
-        "sourceMap": true,
-        "removeComments": false,
-        "noImplicitAny": false
-    },
-        "exclude": ["node_modules"]
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [ "es2015", "dom" ],
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true
+  }
 }

@@ -17,10 +17,9 @@ import { CatsInputComponent } from './cats/cats.input.component';
 import { CatsService } from './cats/cats.service';
 
 const routes: Routes = [
-	{ path: '', redirectTo:'cats', pathMatch: 'full' },
-	{ path: 'cats', component: CatsComponent },
-	{ path: 'cats/addCat', component: CatsInputComponent },
-	{ path: 'cats/:id', component: CatsDetailsComponent }
+	{ path: '', component: CatsComponent },
+	{ path: 'addCat', component: CatsInputComponent },
+	{ path: ':id', component: CatsDetailsComponent }
 ]
 
 @NgModule({
